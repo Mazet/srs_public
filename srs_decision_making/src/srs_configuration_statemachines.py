@@ -53,6 +53,9 @@
 
 from srs_monitoring_statemachines import *
 from robot_configuration import *
+import roslib; roslib.load_manifest('SRS_reward_function')
+import rospy
+from SRS_reward_function.srv import * 
 
 """
 This file contains state machines for robot configuration checking during the operation 
@@ -116,6 +119,76 @@ class state_checking_during_paused (smach.State):
         
         return 'preempted'
 
+def my_arm_movement(action_name, action_stage):    
+    global current_task_info  
+   # ''' check arm position'''
+    #if current_task_info.arm_position=="":
+    #sss.move("arm",resp.action)
+    #handle.wait()
+        #current_task_info.arm_position = "folded"      
+    rospy.wait_for_service('armrewardserver',10)
+    try:
+        arm = rospy.ServiceProxy('armrewardserver', rewardsrv)
+        rospy.loginfo("client")
+        resp = arm(action_name, action_stage)
+        print resp.armstate  
+        armstate=resp.armstate
+        sss.move("arm",armstate)   
+    except rospy.ServiceException, e:
+        print "Service call failed: %s"%e
+         
+def my_head_movement(action_name, action_stage):
+    global current_task_info    
+    rospy.wait_for_service('headrewardserver',10)
+    try:
+        head = rospy.ServiceProxy('headrewardserver', rewardsrv)
+        rospy.loginfo("client")
+        resp1 = head(action_name, action_stage)
+        print resp1.headstate
+        headstate=resp1.headstate
+        sss.move("head",headstate) 
+    except rospy.ServiceException, e:
+        print "Service call failed: %s"%e
+
+def my_tray_movement(action_name, action_stage):
+    global current_task_info    
+    rospy.wait_for_service('trayrewardserver',10)
+    try:
+        tray = rospy.ServiceProxy('trayrewardserver', rewardsrv)
+        rospy.loginfo("client")
+        resp2 = tray(action_name, action_stage)
+        print resp2.traystate
+        traystate=resp2.traystate
+        sss.move("tray",traystate) 
+    except rospy.ServiceException, e:
+        print "Service call failed: %s"%e
+        
+def my_sdh_movement(action_name, action_stage):
+    global current_task_info    
+    rospy.wait_for_service('sdhrewardserver',10)
+    try:
+        sdh = rospy.ServiceProxy('sdhrewardserver', rewardsrv)
+        rospy.loginfo("client")
+        resp3 = sdh(action_name, action_stage)
+        print resp3.sdhstate
+        sdhstate=resp3.sdhstate
+        sss.move("sdh",sdhstate) 
+    except rospy.ServiceException, e:
+        print "Service call failed: %s"%e
+
+def my_torso_movement(action_name, action_stage):
+    global current_task_info    
+    rospy.wait_for_service('torsorewardserver',10)
+    try:
+        torso = rospy.ServiceProxy('torsorewardserver', rewardsrv)
+        rospy.loginfo("client")
+        resp4 = torso(action_name, action_stage)
+        print resp4.torsostate
+        torsostate=resp4.torsostate
+        sss.move("torso",torsostate) 
+    except rospy.ServiceException, e:
+        print "Service call failed: %s"%e
+
 
 def robot_configuration(parent, action_name, action_stage):
     
@@ -125,6 +198,12 @@ def robot_configuration(parent, action_name, action_stage):
     global robot_config_need_no_action
     
     handles = list()
+    
+    my_arm_movement(action_name, action_stage)
+    my_head_movement(action_name, action_stage) 
+    my_tray_movement(action_name, action_stage)
+    my_sdh_movement(action_name, action_stage)
+    my_torso_movement(action_name, action_stage)
     
     if action_name == 'navigation':
         if current_task_info.object_on_tray: 

@@ -66,7 +66,7 @@ class Ddict(dict):
         return dict.__getitem__(self, key)
     
     
-component_list = ['torso','tray','arm','sdh','head']
+component_list = []
     
     
 robot_config_pre = Ddict(dict)
