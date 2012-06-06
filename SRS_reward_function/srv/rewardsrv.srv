@@ -1,0 +1,13 @@
+string action_name   # current action name: navigation, detection, grasp, put on tray
+string action_stage  # current action stage: pre-config and post-config
+---
+float64 bestVarm # Best reward for the arm
+string armstate # know the state for the bestvalue function of the arm
+float64 bestVhead # Best reward for the head
+string headstate # know the state for the bestvalue function of the head
+float64 bestVtray # Best reward for the tray
+string traystate # know the state for the bestvalue function of the tray
+float64 bestVsdh # Best reward for the sdh
+string sdhstate # know the state for the bestvalue function of the sdh
+float64 bestVtorso # Best reward for the torso
+string torsostate # know the state for the bestvalue function of the torso

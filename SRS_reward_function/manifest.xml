@@ -1,0 +1,22 @@
+<package>
+  <description brief="SRS_reward_function">
+
+     SRS_reward_function
+
+  </description>
+  <author>srs</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/SRS_reward_function</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="roslib"/>
+  <!--depend package="srs_msgs"/-->
+  <!--depend package="srs_knowledge"/-->
+  <!--depend package="srs_states"/-->
+  <!--depend package="srs_object_verification"/-->
+  <!--depend package="srs_decision_making"/-->
+     
+</package>
+
+
