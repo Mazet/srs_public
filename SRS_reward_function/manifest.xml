@@ -11,6 +11,8 @@
   <depend package="roscpp"/>
   <depend package="rospy"/>
   <depend package="roslib"/>
+  <depend package="eigen"/>
+  
   <!--depend package="srs_msgs"/-->
   <!--depend package="srs_knowledge"/-->
   <!--depend package="srs_states"/-->

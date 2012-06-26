@@ -26,10 +26,16 @@ def DM_client():
     _goal.priority=0
     # Sends the goal to the action server.
     client.send_goal(_goal)
-
+    #################################################
+    now = rospy.Time.now()
+    print now.to_sec()
+    #################################################
     # Waits for the server to finish performing the action.
     client.wait_for_result()
-
+    #################################################
+    time = rospy.Time.now()-now
+    print time.to_sec()
+    #################################################
     # Prints out the result of executing the action
     return client.get_result()  
 

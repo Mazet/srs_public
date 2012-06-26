@@ -1,9 +1,26 @@
 string action_name   # current action name: navigation, detection, grasp, put on tray
 string action_stage  # current action stage: pre-config and post-config
+string result_action # result of the previous action (failed, succeeded, preempted...)
+float64 x0y0
+float64 x0y1
+float64 x0y2
+float64 x0y3
+float64 x1y0
+float64 x1y1
+float64 x1y2
+float64 x1y3
+float64 x2y0
+float64 x2y1
+float64 x2y2
+float64 x2y3
+float64 x3y0
+float64 x3y1
+float64 x3y2
+float64 x3y3
 ---
 float64 bestVarm # Best reward for the arm
 string armstate # know the state for the bestvalue function of the arm
-float64 bestVhead # Best reward for the head
+float64 bestVhead # Best rewResponseResponseard for the head
 string headstate # know the state for the bestvalue function of the head
 float64 bestVtray # Best reward for the tray
 string traystate # know the state for the bestvalue function of the tray
@@ -11,3 +28,19 @@ float64 bestVsdh # Best reward for the sdh
 string sdhstate # know the state for the bestvalue function of the sdh
 float64 bestVtorso # Best reward for the torso
 string torsostate # know the state for the bestvalue function of the torso
+float64 X0Y0
+float64 X0Y1
+float64 X0Y2
+float64 X0Y3
+float64 X1Y0
+float64 X1Y1
+float64 X1Y2
+float64 X1Y3
+float64 X2Y0
+float64 X2Y1
+float64 X2Y2
+float64 X2Y3
+float64 X3Y0
+float64 X3Y1
+float64 X3Y2
+float64 X3Y3

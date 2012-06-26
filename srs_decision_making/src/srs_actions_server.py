@@ -245,7 +245,8 @@ class SRSActionServer(SimpleActionServer):
 
          
 class SRS_DM_ACTION(object):
-    #action server for taking tasks 
+    #action server for taking tasks  
+        
     def __init__(self, name):
 
         self._action_name = name
@@ -255,16 +256,12 @@ class SRS_DM_ACTION(object):
         self._task = ""
         self._parameter = ""
         self._as.start()
-        self.robot_initialised= False
-         
-                
+        self.robot_initialised= False 
+                            
         #self._as.register_goal_callback(self.goal_cb)
         self._as.register_preempt_callback(self.priority_cb)
-        
+        #initialisation_probability_matrix()
         rospy.loginfo("Waiting for wake up the server ...")
-        
-    
-
         
     def robot_initialisation_process(self):
         if not self.robot_initialised :
@@ -284,9 +281,7 @@ class SRS_DM_ACTION(object):
             #handle_arm.wait()
             #handle_sdh.wait()
             #handle_head.wait()
-            self.robot_initialised = True
-            
-        
+            self.robot_initialised = True 
 
         
     def init_sm(self):

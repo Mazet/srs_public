@@ -56,7 +56,7 @@ from robot_configuration import *
 import roslib; roslib.load_manifest('SRS_reward_function')
 import rospy
 from SRS_reward_function.srv import * 
-
+flag='true'
 """
 This file contains state machines for robot configuration checking during the operation 
 The pause and resume generic state are also included in the file
@@ -118,79 +118,85 @@ class state_checking_during_paused (smach.State):
         self.service_preempt()
         
         return 'preempted'
+    
+################################################################################################
 
-def my_arm_movement(action_name, action_stage):    
+def my_movement(action_name, action_stage, result_action, object_in_hand, object_on_tray):    
     global current_task_info  
-   # ''' check arm position'''
-    #if current_task_info.arm_position=="":
-    #sss.move("arm",resp.action)
-    #handle.wait()
-        #current_task_info.arm_position = "folded"      
-    rospy.wait_for_service('armrewardserver',10)
+    len_step_info = len(current_task_info.last_step_info)     
+    result_action = current_task_info.last_step_info[len_step_info - 1].outcome
+    
+    rospy.wait_for_service('rewardserver',10)
     try:
-        arm = rospy.ServiceProxy('armrewardserver', rewardsrv)
+        reward = rospy.ServiceProxy('rewardserver', rewardsrv)
         rospy.loginfo("client")
-        resp = arm(action_name, action_stage)
-        print resp.armstate  
-        armstate=resp.armstate
-        sss.move("arm",armstate)   
-    except rospy.ServiceException, e:
-        print "Service call failed: %s"%e
-         
-def my_head_movement(action_name, action_stage):
-    global current_task_info    
-    rospy.wait_for_service('headrewardserver',10)
-    try:
-        head = rospy.ServiceProxy('headrewardserver', rewardsrv)
-        rospy.loginfo("client")
-        resp1 = head(action_name, action_stage)
-        print resp1.headstate
-        headstate=resp1.headstate
-        sss.move("head",headstate) 
-    except rospy.ServiceException, e:
-        print "Service call failed: %s"%e
-
-def my_tray_movement(action_name, action_stage):
-    global current_task_info    
-    rospy.wait_for_service('trayrewardserver',10)
-    try:
-        tray = rospy.ServiceProxy('trayrewardserver', rewardsrv)
-        rospy.loginfo("client")
-        resp2 = tray(action_name, action_stage)
-        print resp2.traystate
-        traystate=resp2.traystate
-        sss.move("tray",traystate) 
-    except rospy.ServiceException, e:
-        print "Service call failed: %s"%e
         
-def my_sdh_movement(action_name, action_stage):
-    global current_task_info    
-    rospy.wait_for_service('sdhrewardserver',10)
-    try:
-        sdh = rospy.ServiceProxy('sdhrewardserver', rewardsrv)
-        rospy.loginfo("client")
-        resp3 = sdh(action_name, action_stage)
-        print resp3.sdhstate
-        sdhstate=resp3.sdhstate
-        sss.move("sdh",sdhstate) 
+        reqsrv=rewardsrvRequest()
+        reqsrv.action_name=action_name
+        reqsrv.action_stage=action_stage
+        reqsrv.result_action=result_action
+        reqsrv.x0y0=current_task_info.probability[0][0]
+        reqsrv.x0y1=current_task_info.probability[0][1]
+        reqsrv.x0y2=current_task_info.probability[0][2]
+        reqsrv.x0y3=current_task_info.probability[0][3]
+        reqsrv.x1y0=current_task_info.probability[1][0]
+        reqsrv.x1y1=current_task_info.probability[1][1]
+        reqsrv.x1y2=current_task_info.probability[1][2]
+        reqsrv.x1y3=current_task_info.probability[1][3]
+        reqsrv.x2y0=current_task_info.probability[2][0]
+        reqsrv.x2y1=current_task_info.probability[2][1]
+        reqsrv.x2y2=current_task_info.probability[2][2]
+        reqsrv.x2y3=current_task_info.probability[2][3]
+        reqsrv.x3y0=current_task_info.probability[3][0]
+        reqsrv.x3y1=current_task_info.probability[3][1]
+        reqsrv.x3y2=current_task_info.probability[3][2]
+        reqsrv.x3y3=current_task_info.probability[3][3]
+        
+        resp = reward(reqsrv)
+        current_task_info.probability[0][0]=resp.X0Y0
+        current_task_info.probability[0][1]=resp.X0Y1
+        current_task_info.probability[0][2]=resp.X0Y2
+        current_task_info.probability[0][3]=resp.X0Y3
+        current_task_info.probability[1][0]=resp.X1Y0
+        current_task_info.probability[1][1]=resp.X1Y1
+        current_task_info.probability[1][2]=resp.X1Y2
+        current_task_info.probability[1][3]=resp.X1Y3
+        current_task_info.probability[2][0]=resp.X2Y0
+        current_task_info.probability[2][1]=resp.X2Y1
+        current_task_info.probability[2][2]=resp.X2Y2
+        current_task_info.probability[2][3]=resp.X2Y3
+        current_task_info.probability[3][0]=resp.X3Y0
+        current_task_info.probability[3][1]=resp.X3Y1
+        current_task_info.probability[3][2]=resp.X3Y2
+        current_task_info.probability[3][3]=resp.X3Y3
+        
+        if current_task_info.object_on_tray == True :
+            current_task_info.probability = [[0.1,0.7,0.2,0],[1,0,0,0],[0.7,0,0.3,0],[1,0,0,0]]
+                            
+        if current_task_info.object_in_hand == False :
+            sdhstate=resp.sdhstate
+            sss.move("sdh",sdhstate)
+             
+        #if current_task_info.object_on_tray == False :    
+        armstate=resp.armstate
+        sss.move("arm",armstate)
+        
+        headstate=resp.headstate
+        sss.move("head",headstate)
+                
+        torsostate=resp.torsostate
+        sss.move("torso",torsostate)
+        
+        if current_task_info.object_on_tray == False :
+            traystate=resp.traystate
+            sss.move("tray",traystate) 
+            
     except rospy.ServiceException, e:
         print "Service call failed: %s"%e
 
-def my_torso_movement(action_name, action_stage):
-    global current_task_info    
-    rospy.wait_for_service('torsorewardserver',10)
-    try:
-        torso = rospy.ServiceProxy('torsorewardserver', rewardsrv)
-        rospy.loginfo("client")
-        resp4 = torso(action_name, action_stage)
-        print resp4.torsostate
-        torsostate=resp4.torsostate
-        sss.move("torso",torsostate) 
-    except rospy.ServiceException, e:
-        print "Service call failed: %s"%e
+################################################################################################
 
-
-def robot_configuration(parent, action_name, action_stage):
+def robot_configuration(parent, action_name, action_stage, result_action, object_in_hand, object_on_tray):
     
     global current_task_info
     global component_list
@@ -198,12 +204,12 @@ def robot_configuration(parent, action_name, action_stage):
     global robot_config_need_no_action
     
     handles = list()
-    
-    my_arm_movement(action_name, action_stage)
-    my_head_movement(action_name, action_stage) 
-    my_tray_movement(action_name, action_stage)
-    my_sdh_movement(action_name, action_stage)
-    my_torso_movement(action_name, action_stage)
+
+################################################################################################
+   
+    my_movement(action_name, action_stage, result_action, object_in_hand,object_on_tray)
+
+################################################################################################
     
     if action_name == 'navigation':
         if current_task_info.object_on_tray: 
@@ -279,7 +285,7 @@ class pre_conf(smach.State):
         smach.State.__init__(self , outcomes=['succeeded', 'failed', 'preempted'], input_keys=['action_name'])
     
     def execute (self, userdata):    
-        return robot_configuration(self, userdata.action_name, 'pre-config')
+        return robot_configuration(self, userdata.action_name, 'pre-config','','','')
     
         
 class post_conf(smach.State):
@@ -287,7 +293,7 @@ class post_conf(smach.State):
         smach.State.__init__(self , outcomes=['succeeded', 'failed',  'preempted'], input_keys=['action_name'])
     
     def execute (self, userdata):    
-        return robot_configuration(self, userdata.action_name, 'post-config')
+        return robot_configuration(self, userdata.action_name, 'post-config','','','')
 
 
 co_sm_pre_conf = smach.Concurrence (outcomes=['succeeded', 'failed', 'stopped', 'preempted', 'paused'],
@@ -334,7 +340,7 @@ class co_sm_post_conf(smach.Concurrence):
         self.action_name=action_name
                                   
         with self: 
-            smach.Concurrence.add('State_Checking_During_Operation', state_checking_during_operation())
+            smach.Concurrence.add('State_Checking_DurinTg_Operation', state_checking_during_operation())
             smach.Concurrence.add('MAIN_OPERATION', post_conf(self.action_name))
 """            
 

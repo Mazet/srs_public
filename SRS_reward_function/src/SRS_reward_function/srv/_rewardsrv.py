@@ -4,15 +4,32 @@ import struct
 
 
 class rewardsrvRequest(roslib.message.Message):
-  _md5sum = "33c67ba0578c4d68e51d5f0be941a9b4"
+  _md5sum = "be1484c44a92981cad18615ebaed7e63"
   _type = "SRS_reward_function/rewardsrvRequest"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """string action_name
 string action_stage
+string result_action
+float64 x0y0
+float64 x0y1
+float64 x0y2
+float64 x0y3
+float64 x1y0
+float64 x1y1
+float64 x1y2
+float64 x1y3
+float64 x2y0
+float64 x2y1
+float64 x2y2
+float64 x2y3
+float64 x3y0
+float64 x3y1
+float64 x3y2
+float64 x3y3
 
 """
-  __slots__ = ['action_name','action_stage']
-  _slot_types = ['string','string']
+  __slots__ = ['action_name','action_stage','result_action','x0y0','x0y1','x0y2','x0y3','x1y0','x1y1','x1y2','x1y3','x2y0','x2y1','x2y2','x2y3','x3y0','x3y1','x3y2','x3y3']
+  _slot_types = ['string','string','string','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64']
 
   def __init__(self, *args, **kwds):
     """
@@ -22,7 +39,7 @@ string action_stage
     changes.  You cannot mix in-order arguments and keyword arguments.
     
     The available fields are:
-       action_name,action_stage
+       action_name,action_stage,result_action,x0y0,x0y1,x0y2,x0y3,x1y0,x1y1,x1y2,x1y3,x2y0,x2y1,x2y2,x2y3,x3y0,x3y1,x3y2,x3y3
     
     @param args: complete set of field values, in .msg order
     @param kwds: use keyword arguments corresponding to message field names
@@ -35,9 +52,60 @@ string action_stage
         self.action_name = ''
       if self.action_stage is None:
         self.action_stage = ''
+      if self.result_action is None:
+        self.result_action = ''
+      if self.x0y0 is None:
+        self.x0y0 = 0.
+      if self.x0y1 is None:
+        self.x0y1 = 0.
+      if self.x0y2 is None:
+        self.x0y2 = 0.
+      if self.x0y3 is None:
+        self.x0y3 = 0.
+      if self.x1y0 is None:
+        self.x1y0 = 0.
+      if self.x1y1 is None:
+        self.x1y1 = 0.
+      if self.x1y2 is None:
+        self.x1y2 = 0.
+      if self.x1y3 is None:
+        self.x1y3 = 0.
+      if self.x2y0 is None:
+        self.x2y0 = 0.
+      if self.x2y1 is None:
+        self.x2y1 = 0.
+      if self.x2y2 is None:
+        self.x2y2 = 0.
+      if self.x2y3 is None:
+        self.x2y3 = 0.
+      if self.x3y0 is None:
+        self.x3y0 = 0.
+      if self.x3y1 is None:
+        self.x3y1 = 0.
+      if self.x3y2 is None:
+        self.x3y2 = 0.
+      if self.x3y3 is None:
+        self.x3y3 = 0.
     else:
       self.action_name = ''
       self.action_stage = ''
+      self.result_action = ''
+      self.x0y0 = 0.
+      self.x0y1 = 0.
+      self.x0y2 = 0.
+      self.x0y3 = 0.
+      self.x1y0 = 0.
+      self.x1y1 = 0.
+      self.x1y2 = 0.
+      self.x1y3 = 0.
+      self.x2y0 = 0.
+      self.x2y1 = 0.
+      self.x2y2 = 0.
+      self.x2y3 = 0.
+      self.x3y0 = 0.
+      self.x3y1 = 0.
+      self.x3y2 = 0.
+      self.x3y3 = 0.
 
   def _get_types(self):
     """
@@ -58,6 +126,11 @@ string action_stage
       _x = self.action_stage
       length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.result_action
+      length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self
+      buff.write(_struct_16d.pack(_x.x0y0, _x.x0y1, _x.x0y2, _x.x0y3, _x.x1y0, _x.x1y1, _x.x1y2, _x.x1y3, _x.x2y0, _x.x2y1, _x.x2y2, _x.x2y3, _x.x3y0, _x.x3y1, _x.x3y2, _x.x3y3))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -81,6 +154,16 @@ string action_stage
       start = end
       end += length
       self.action_stage = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      self.result_action = str[start:end]
+      _x = self
+      start = end
+      end += 128
+      (_x.x0y0, _x.x0y1, _x.x0y2, _x.x0y3, _x.x1y0, _x.x1y1, _x.x1y2, _x.x1y3, _x.x2y0, _x.x2y1, _x.x2y2, _x.x2y3, _x.x3y0, _x.x3y1, _x.x3y2, _x.x3y3,) = _struct_16d.unpack(str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
@@ -101,6 +184,11 @@ string action_stage
       _x = self.action_stage
       length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.result_action
+      length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self
+      buff.write(_struct_16d.pack(_x.x0y0, _x.x0y1, _x.x0y2, _x.x0y3, _x.x1y0, _x.x1y1, _x.x1y2, _x.x1y3, _x.x2y0, _x.x2y1, _x.x2y2, _x.x2y3, _x.x3y0, _x.x3y1, _x.x3y2, _x.x3y3))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -126,18 +214,29 @@ string action_stage
       start = end
       end += length
       self.action_stage = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      self.result_action = str[start:end]
+      _x = self
+      start = end
+      end += 128
+      (_x.x0y0, _x.x0y1, _x.x0y2, _x.x0y3, _x.x1y0, _x.x1y1, _x.x1y2, _x.x1y3, _x.x2y0, _x.x2y1, _x.x2y2, _x.x2y3, _x.x3y0, _x.x3y1, _x.x3y2, _x.x3y3,) = _struct_16d.unpack(str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = roslib.message.struct_I
+_struct_16d = struct.Struct("<16d")
 """autogenerated by genmsg_py from rewardsrvResponse.msg. Do not edit."""
 import roslib.message
 import struct
 
 
 class rewardsrvResponse(roslib.message.Message):
-  _md5sum = "94948230adee33385046647d728f7602"
+  _md5sum = "102490cac7d6af66499edf9514c9ee88"
   _type = "SRS_reward_function/rewardsrvResponse"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float64 bestVarm
@@ -150,11 +249,26 @@ float64 bestVsdh
 string sdhstate
 float64 bestVtorso
 string torsostate
-
+float64 X0Y0
+float64 X0Y1
+float64 X0Y2
+float64 X0Y3
+float64 X1Y0
+float64 X1Y1
+float64 X1Y2
+float64 X1Y3
+float64 X2Y0
+float64 X2Y1
+float64 X2Y2
+float64 X2Y3
+float64 X3Y0
+float64 X3Y1
+float64 X3Y2
+float64 X3Y3
 
 """
-  __slots__ = ['bestVarm','armstate','bestVhead','headstate','bestVtray','traystate','bestVsdh','sdhstate','bestVtorso','torsostate']
-  _slot_types = ['float64','string','float64','string','float64','string','float64','string','float64','string']
+  __slots__ = ['bestVarm','armstate','bestVhead','headstate','bestVtray','traystate','bestVsdh','sdhstate','bestVtorso','torsostate','X0Y0','X0Y1','X0Y2','X0Y3','X1Y0','X1Y1','X1Y2','X1Y3','X2Y0','X2Y1','X2Y2','X2Y3','X3Y0','X3Y1','X3Y2','X3Y3']
+  _slot_types = ['float64','string','float64','string','float64','string','float64','string','float64','string','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64']
 
   def __init__(self, *args, **kwds):
     """
@@ -164,7 +278,7 @@ string torsostate
     changes.  You cannot mix in-order arguments and keyword arguments.
     
     The available fields are:
-       bestVarm,armstate,bestVhead,headstate,bestVtray,traystate,bestVsdh,sdhstate,bestVtorso,torsostate
+       bestVarm,armstate,bestVhead,headstate,bestVtray,traystate,bestVsdh,sdhstate,bestVtorso,torsostate,X0Y0,X0Y1,X0Y2,X0Y3,X1Y0,X1Y1,X1Y2,X1Y3,X2Y0,X2Y1,X2Y2,X2Y3,X3Y0,X3Y1,X3Y2,X3Y3
     
     @param args: complete set of field values, in .msg order
     @param kwds: use keyword arguments corresponding to message field names
@@ -193,6 +307,38 @@ string torsostate
         self.bestVtorso = 0.
       if self.torsostate is None:
         self.torsostate = ''
+      if self.X0Y0 is None:
+        self.X0Y0 = 0.
+      if self.X0Y1 is None:
+        self.X0Y1 = 0.
+      if self.X0Y2 is None:
+        self.X0Y2 = 0.
+      if self.X0Y3 is None:
+        self.X0Y3 = 0.
+      if self.X1Y0 is None:
+        self.X1Y0 = 0.
+      if self.X1Y1 is None:
+        self.X1Y1 = 0.
+      if self.X1Y2 is None:
+        self.X1Y2 = 0.
+      if self.X1Y3 is None:
+        self.X1Y3 = 0.
+      if self.X2Y0 is None:
+        self.X2Y0 = 0.
+      if self.X2Y1 is None:
+        self.X2Y1 = 0.
+      if self.X2Y2 is None:
+        self.X2Y2 = 0.
+      if self.X2Y3 is None:
+        self.X2Y3 = 0.
+      if self.X3Y0 is None:
+        self.X3Y0 = 0.
+      if self.X3Y1 is None:
+        self.X3Y1 = 0.
+      if self.X3Y2 is None:
+        self.X3Y2 = 0.
+      if self.X3Y3 is None:
+        self.X3Y3 = 0.
     else:
       self.bestVarm = 0.
       self.armstate = ''
@@ -204,6 +350,22 @@ string torsostate
       self.sdhstate = ''
       self.bestVtorso = 0.
       self.torsostate = ''
+      self.X0Y0 = 0.
+      self.X0Y1 = 0.
+      self.X0Y2 = 0.
+      self.X0Y3 = 0.
+      self.X1Y0 = 0.
+      self.X1Y1 = 0.
+      self.X1Y2 = 0.
+      self.X1Y3 = 0.
+      self.X2Y0 = 0.
+      self.X2Y1 = 0.
+      self.X2Y2 = 0.
+      self.X2Y3 = 0.
+      self.X3Y0 = 0.
+      self.X3Y1 = 0.
+      self.X3Y2 = 0.
+      self.X3Y3 = 0.
 
   def _get_types(self):
     """
@@ -238,6 +400,8 @@ string torsostate
       _x = self.torsostate
       length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self
+      buff.write(_struct_16d.pack(_x.X0Y0, _x.X0Y1, _x.X0Y2, _x.X0Y3, _x.X1Y0, _x.X1Y1, _x.X1Y2, _x.X1Y3, _x.X2Y0, _x.X2Y1, _x.X2Y2, _x.X2Y3, _x.X3Y0, _x.X3Y1, _x.X3Y2, _x.X3Y3))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -294,6 +458,10 @@ string torsostate
       start = end
       end += length
       self.torsostate = str[start:end]
+      _x = self
+      start = end
+      end += 128
+      (_x.X0Y0, _x.X0Y1, _x.X0Y2, _x.X0Y3, _x.X1Y0, _x.X1Y1, _x.X1Y2, _x.X1Y3, _x.X2Y0, _x.X2Y1, _x.X2Y2, _x.X2Y3, _x.X3Y0, _x.X3Y1, _x.X3Y2, _x.X3Y3,) = _struct_16d.unpack(str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
@@ -328,6 +496,8 @@ string torsostate
       _x = self.torsostate
       length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self
+      buff.write(_struct_16d.pack(_x.X0Y0, _x.X0Y1, _x.X0Y2, _x.X0Y3, _x.X1Y0, _x.X1Y1, _x.X1Y2, _x.X1Y3, _x.X2Y0, _x.X2Y1, _x.X2Y2, _x.X2Y3, _x.X3Y0, _x.X3Y1, _x.X3Y2, _x.X3Y3))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -386,14 +556,19 @@ string torsostate
       start = end
       end += length
       self.torsostate = str[start:end]
+      _x = self
+      start = end
+      end += 128
+      (_x.X0Y0, _x.X0Y1, _x.X0Y2, _x.X0Y3, _x.X1Y0, _x.X1Y1, _x.X1Y2, _x.X1Y3, _x.X2Y0, _x.X2Y1, _x.X2Y2, _x.X2Y3, _x.X3Y0, _x.X3Y1, _x.X3Y2, _x.X3Y3,) = _struct_16d.unpack(str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = roslib.message.struct_I
+_struct_16d = struct.Struct("<16d")
 _struct_d = struct.Struct("<d")
 class rewardsrv(roslib.message.ServiceDefinition):
   _type          = 'SRS_reward_function/rewardsrv'
-  _md5sum = '35c11fe2c18aee380e26784551227a30'
+  _md5sum = '63aee61a55251f412802388c14f67e9a'
   _request_class  = rewardsrvRequest
   _response_class = rewardsrvResponse
