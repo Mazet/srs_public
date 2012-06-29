@@ -74,7 +74,7 @@ int nav_pre_back=8,detect_pre_back=9,grasp_pre_back=10,put_pre_back=11,nav_post_
 std::vector<float> R;   //create a vector R with an unknown size
 	R.resize(16);  // define the size of the vector
 //std::vector<float> T;   //create a vector T with an unknown size
-		//T.resize(2);  // define the size of the vector
+//T.resize(2);  // define the size of the vector
 Vhead.resize(2);
 for (int i=1;i>=0;i--)
 {
@@ -96,15 +96,11 @@ Vhead[i].resize(2);
 	{
 		if (action_stage=="pre-config")
 		{
-			//Vhead[0][front]=R[nav_pre_front] + gamma*(T(0,0)*(R[nav_pre_front]+R[nav_pre_back])+T(0,1)*(R[detect_pre_front]+R[detect_pre_back])+T(0,2)*(R[grasp_pre_front]+R[grasp_pre_back])+T(0,3)*(R[put_pre_front]+R[put_pre_back]));
-			//Vhead[0][back]=R[nav_pre_back] + gamma*(T(0,0)*(R[nav_pre_front]+R[nav_pre_back])+T(0,1)*(R[detect_pre_front]+R[detect_pre_back])+T(0,2)*(R[grasp_pre_front]+R[grasp_pre_back])+T(0,3)*(R[put_pre_front]+R[put_pre_back]));
 			Vhead[0][front]=R[nav_pre_front] + gamma*(T(0,0)*R[nav_pre_front]+T(0,1)*R[detect_pre_front]+T(0,2)*R[grasp_pre_front]+T(0,3)*R[put_pre_front]);
 			Vhead[0][back]=R[nav_pre_back] + gamma*(T(0,0)*R[nav_pre_back]+T(0,1)*R[detect_pre_back]+T(0,2)*R[grasp_pre_back]+T(0,3)*R[put_pre_back]);
 		}
 		if (action_stage=="post-config")
 		{
-			//Vhead[0][front]=R[nav_post_front] + gamma*(T(0,0)*(R[nav_post_front]+R[nav_post_back])+T(0,1)*(R[detect_post_front]+R[detect_post_back])+T(0,2)*(R[grasp_post_front]+R[grasp_post_back])+T(0,3)*(R[put_post_front]+R[put_post_back]));
-			//Vhead[0][back]=R[nav_post_back] + gamma*(T(0,0)*(R[nav_post_front]+R[nav_post_back])+T(0,1)*(R[detect_post_front]+R[detect_post_back])+T(0,2)*(R[grasp_post_front]+R[grasp_post_back])+T(0,3)*(R[put_post_front]+R[put_post_back]));
 			Vhead[0][front]=R[nav_post_front] + gamma*T(0,0)*(R[nav_post_front]+T(0,1)*R[detect_post_front]+T(0,2)*R[grasp_post_front]+T(0,3)*R[put_post_front]);
 			Vhead[0][back]=R[nav_post_back] + gamma*(T(0,0)*R[nav_post_back]+T(0,1)*R[detect_post_back]+T(0,2)*R[grasp_post_back]+T(0,3)*R[put_post_back]);
 		}
@@ -113,15 +109,11 @@ Vhead[i].resize(2);
 	{
 		if (action_stage=="pre-config")
 		{
-			//Vhead[0][front]=R[detect_pre_front] + gamma*(T(1,0)*(R[nav_pre_front]+R[nav_pre_back])+T(1,1)*(R[detect_pre_front]+R[detect_pre_back])+T(1,2)*(R[grasp_pre_front]+R[grasp_pre_back])+T(1,3)*(R[put_pre_front]+R[put_pre_back]));
-			//Vhead[0][back]=R[detect_pre_back] + gamma*(T(1,0)*(R[nav_pre_front]+R[nav_pre_back])+T(1,1)*(R[detect_pre_front]+R[detect_pre_back])+T(1,2)*(R[grasp_pre_front]+R[grasp_pre_back])+T(1,3)*(R[put_pre_front]+R[put_pre_back]));
 			Vhead[0][front]=R[detect_pre_front] + gamma*(T(1,0)*R[nav_pre_front]+T(1,1)*R[detect_pre_front]+T(1,2)*R[grasp_pre_front]+T(1,3)*R[put_pre_front]);
 			Vhead[0][back]=R[detect_pre_back] + gamma*(T(1,0)*R[nav_pre_back]+T(1,1)*R[detect_pre_back]+T(1,2)*R[grasp_pre_back]+T(1,3)*R[put_pre_back]);
 		}
 		if (action_stage=="post-config")
 		{
-			//Vhead[0][front]=R[detect_post_front] + gamma*(T(1,0)*(R[nav_post_front]+R[nav_post_back])+T(1,1)*(R[detect_post_front]+R[detect_post_back])+T(1,2)*(R[grasp_post_front]+R[grasp_post_back])+T(1,3)*(R[put_post_front]+R[put_post_back]));
-			//Vhead[0][back]=R[detect_post_back] + gamma*(T(1,0)*(R[nav_post_front]+R[nav_post_back])+T(1,1)*(R[detect_post_front]+R[detect_post_back])+T(1,2)*(R[grasp_post_front]+R[grasp_post_back])+T(1,3)*(R[put_post_front]+R[put_post_back]));
 			Vhead[0][front]=R[detect_post_front] + gamma*T(1,0)*(R[nav_post_front]+T(1,1)*R[detect_post_front]+T(1,2)*R[grasp_post_front]+T(1,3)*R[put_post_front]);
 			Vhead[0][back]=R[detect_post_back] + gamma*(T(1,0)*R[nav_post_back]+T(1,1)*R[detect_post_back]+T(1,2)*R[grasp_post_back]+T(1,3)*R[put_post_back]);
 		}
@@ -130,15 +122,11 @@ Vhead[i].resize(2);
 	{
 		if (action_stage=="pre-config")
 		{
-			//Vhead[0][front]=R[grasp_pre_front] + gamma*(T(2,0)*(R[nav_pre_front]+R[nav_pre_back])+T(2,1)*(R[detect_pre_front]+R[detect_pre_back])+T(2,2)*(R[grasp_pre_front]+R[grasp_pre_back])+T(2,3)*(R[put_pre_front]+R[put_pre_back]));
-			//Vhead[0][back]=R[grasp_pre_back] + gamma*(T(2,0)*(R[nav_pre_front]+R[nav_pre_back])+T(2,1)*(R[detect_pre_front]+R[detect_pre_back])+T(2,2)*(R[grasp_pre_front]+R[grasp_pre_back])+T(2,3)*(R[put_pre_front]+R[put_pre_back]));
 			Vhead[0][front]=R[grasp_pre_front] + gamma*(T(2,0)*R[nav_pre_front]+T(2,1)*R[detect_pre_front]+T(2,2)*R[grasp_pre_front]+T(2,3)*R[put_pre_front]);
 			Vhead[0][back]=R[grasp_pre_back] + gamma*(T(2,0)*R[nav_pre_back]+T(2,1)*R[detect_pre_back]+T(2,2)*R[grasp_pre_back]+T(2,3)*R[put_pre_back]);
 		}
 		if (action_stage=="post-config")
 		{
-			//Vhead[0][front]=R[grasp_post_front] + gamma*(T(2,0)*(R[nav_post_front]+R[nav_post_back])+T(2,1)*(R[detect_post_front]+R[detect_post_back])+T(2,2)*(R[grasp_post_front]+R[grasp_post_back])+T(2,3)*(R[put_post_front]+R[put_post_back]));
-			//Vhead[0][back]=R[grasp_post_back] + gamma*(T(2,0)*(R[nav_post_front]+R[nav_post_back])+T(2,1)*(R[detect_post_front]+R[detect_post_back])+T(2,2)*(R[grasp_post_front]+R[grasp_post_back])+T(2,3)*(R[put_post_front]+R[put_post_back]));
 			Vhead[0][front]=R[grasp_post_front] + gamma*T(2,0)*(R[nav_post_front]+T(2,1)*R[detect_post_front]+T(2,2)*R[grasp_post_front]+T(2,3)*R[put_post_front]);
 			Vhead[0][back]=R[grasp_post_back] + gamma*(T(2,0)*R[nav_post_back]+T(2,1)*R[detect_post_back]+T(2,2)*R[grasp_post_back]+T(2,3)*R[put_post_back]);
 		}
@@ -147,15 +135,11 @@ Vhead[i].resize(2);
 	{
 		if (action_stage=="pre-config")
 		{
-			//Vhead[0][front]=R[put_pre_front] + gamma*(T(3,0)*(R[nav_pre_front]+R[nav_pre_back])+T(3,1)*(R[detect_pre_front]+R[detect_pre_back])+T(3,2)*(R[grasp_pre_front]+R[grasp_pre_back])+T(3,3)*(R[put_pre_front]+R[put_pre_back]));
-			//Vhead[0][back]=R[put_pre_back] + gamma*(T(3,0)*(R[nav_pre_front]+R[nav_pre_back])+T(3,1)*(R[detect_pre_front]+R[detect_pre_back])+T(3,2)*(R[grasp_pre_front]+R[grasp_pre_back])+T(3,3)*(R[put_pre_front]+R[put_pre_back]));
 			Vhead[0][front]=R[put_pre_front] + gamma*(T(3,0)*R[nav_pre_front]+T(3,1)*R[detect_pre_front]+T(3,2)*R[grasp_pre_front]+T(3,3)*R[put_pre_front]);
 			Vhead[0][back]=R[put_pre_back] + gamma*(T(3,0)*R[nav_pre_back]+T(3,1)*R[detect_pre_back]+T(3,2)*R[grasp_pre_back]+T(3,3)*R[put_pre_back]);
 		}
 		if (action_stage=="post-config")
 		{
-			//Vhead[0][front]=R[put_post_front] + gamma*(T(3,0)*(R[nav_post_front]+R[nav_post_back])+T(3,1)*(R[detect_post_front]+R[detect_post_back])+T(3,2)*(R[grasp_post_front]+R[grasp_post_back])+T(3,3)*(R[put_post_front]+R[put_post_back]));
-			//Vhead[0][back]=R[put_post_back] + gamma*(T(3,0)*(R[nav_post_front]+R[nav_post_back])+T(3,1)*(R[detect_post_front]+R[detect_post_back])+T(3,2)*(R[grasp_post_front]+R[grasp_post_back])+T(3,3)*(R[put_post_front]+R[put_post_back]));
 			Vhead[0][front]=R[put_post_front] + gamma*T(3,0)*(R[nav_post_front]+T(3,1)*R[detect_post_front]+T(3,2)*R[grasp_post_front]+T(3,3)*R[put_post_front]);
 			Vhead[0][back]=R[put_post_back] + gamma*(T(3,0)*R[nav_post_back]+T(3,1)*R[detect_post_back]+T(3,2)*R[grasp_post_back]+T(3,3)*R[put_post_back]);
 		}
@@ -197,9 +181,7 @@ Vhead[i].resize(2);
 				for(int d=0;d<dim;d++)
 				{
 				bPos[d][i]= head_randfunc(head_xs, head_xe);
-				//std::cout << "bpos " << bPos[d][i] << std::endl;
 				fit[i]=head_func(bPos[d][i], Vhead);
-				//std::cout << "fit: " << fit[i] << std::endl;
 				}
 			}
 
@@ -207,13 +189,11 @@ Vhead[i].resize(2);
 			// fit, contains the value of the fit350000ness function
 			// thus forming a (fit,bPos) tuple
 
-			//sort by fitness, preserving the (f,pos) tuple
+			//sort by fitness, preserving the (fit,bpos) tuple
 			head_funcSort(fit, sortedFit, bPos, bPosSort, head_n); // bpossort contains all the sort position of the scout bees
 			fit[bPosSort[0][0]]=head_func(bPosSort[0][0], Vhead);
-			//std::cout << "bpossort: " << bPosSort[0][0] << std::endl;
-			//std::cout << "fit: " << fit[bPosSort[0][0]] << std::endl;
 
-			//imax number of iteration
+			//head_imax number of iteration
 			for(int iter=0; iter<head_imax ;iter++)
 			{
 				for(int d=0;d<dim;d++)
@@ -240,27 +220,20 @@ Vhead[i].resize(2);
 						for(int d=0;d<dim;d++)//d dimension
 						{
 							candidx[d][k]=bPosSort[d][k]; //define the candidate position
-							//std::cout << "candid: " << candidx[d][k] << std::endl;
 							if ((candidx[d][k]-nghx[d])<head_xs) // boundry check (left)
 								{
 								 bNghPos[d][j]=head_randfunc(head_xs,candidx[d][k]+nghx[d]);
-								//std::cout << "bNghPos1: " << bNghPos[d][j] << std::endl;
-								bNghFit[j]=head_func(bNghPos[d][j], Vhead);
-								//std::cout << "bNghFit: " << bNghFit[j] << std::endl;
+								 bNghFit[j]=head_func(bNghPos[d][j], Vhead);
 								}
 							if ((candidx[d][k]+nghx[d])>head_xe)// boundry check (right)
 								{
 								bNghPos[d][j]=head_randfunc(candidx[d][k]-nghx[d],head_xe);
-								//std::cout << "bNghPos2: " << bNghPos[d][j] << std::endl;
 								bNghFit[j]=head_func(bNghPos[d][j], Vhead);
-								//std::cout << "bNghFit: " << bNghFit[j] << std::endl;
 								}
 							if ((candidx[d][k]-nghx[d])>=head_xs and (candidx[d][k]+nghx[d])<=head_xe )
 								{
 								bNghPos[d][j]=head_randfunc(candidx[d][k]-nghx[d] , candidx[d][k]+nghx[d]);
-								//std::cout << "bNghPos3: " << bNghPos[d][j] << std::endl;
 								bNghFit[j]=head_func(bNghPos[d][j], Vhead);
-								//std::cout << "bNghFit: " << bNghFit[j] << std::endl;
 								}
 							if(bNghFit[j]>= temp1 )
 							{
@@ -269,6 +242,7 @@ Vhead[i].resize(2);
 							}  // end of choosing the rep bee
 						}
 					}// end of recruitment
+
 				}	// end of  elite Neighbourhood Search
 
 				 //Sort
@@ -277,8 +251,6 @@ Vhead[i].resize(2);
 				sortedFit[0]=temp1;
 				bPosSort[0][0]=temp2;
 			}
-			//std::cout << "temp1: " <<temp1 << std::endl;
-			//std::cout << "temp2: " <<temp2 << std::endl;
 
 	// ----------------------------------------Global search  ------------------------------------
 
@@ -288,22 +260,22 @@ Vhead[i].resize(2);
 						for(int d=0;d<dim;d++)
 						{
 							globalPos[d][k]=head_randfunc(head_xs, head_xe);
-							//std::cout << "bposglobal " << globalPos[d][k] << std::endl;
 							globalFit[k]=head_func(globalPos[d][k], Vhead);// evaluate the fitness of the new list
-							//std::cout << "fitglobal: " << globalFit[k] << std::endl;
-						 	if(globalFit[k]>= temp1 )
+							if(globalFit[k]>= temp1 )
 							{
 								temp1=globalFit[k];
 								temp2=globalPos[d][k];
 							}
 						}
 					 }
+
 					 //Sort
 				if (sortedFit[0]<= temp1)
 				{
 					sortedFit[0]=temp1;
 					bPosSort[0][0]=temp2;
 				}
+
 			}	//end iter = imax
 
 		} // end runs

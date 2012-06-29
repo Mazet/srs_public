@@ -92,15 +92,11 @@ float gamma=0.1;  // define the discount factor "gamma"
 			{
 				if (action_stage=="pre-config")
 				{
-					//Vtray[0][up]=R[nav_pre_up] + gamma*(T(0,0)*(R[nav_pre_up]+R[nav_pre_down])+T(0,1)*(R[detect_pre_up]+R[detect_pre_down])+T(0,2)*(R[grasp_pre_up]+R[grasp_pre_down])+T(0,3)*(R[put_pre_up]+R[put_pre_down]));
-					//Vtray[0][down]=R[nav_pre_down] + gamma*(T(0,0)*(R[nav_pre_up]+R[nav_pre_down])+T(0,1)*(R[detect_pre_up]+R[detect_pre_down])+T(0,2)*(R[grasp_pre_up]+R[grasp_pre_down])+T(0,3)*(R[put_pre_up]+R[put_pre_down]));
 					Vtray[0][up]=R[nav_pre_up] + gamma*(T(0,0)*R[nav_pre_up]+T(0,1)*R[detect_pre_up]+T(0,2)*R[grasp_pre_up]+T(0,3)*R[put_pre_up]);
 					Vtray[0][down]=R[nav_pre_down] + gamma*(T(0,0)*R[nav_pre_down]+T(0,1)*R[detect_pre_down]+T(0,2)*R[grasp_pre_down]+T(0,3)*R[put_pre_down]);
 				}
 				if (action_stage=="post-config")
 				{
-					//Vtray[0][up]=R[nav_post_up] + gamma*(T(0,0)*(R[nav_post_up]+R[nav_post_down])+T(0,1)*(R[detect_post_up]+R[detect_post_down])+T(0,2)*(R[grasp_post_up]+R[grasp_post_down])+T(0,3)*(R[put_post_up]+R[put_post_down]));
-					//Vtray[0][down]=R[nav_post_down] + gamma*(T(0,0)*(R[nav_post_up]+R[nav_post_down])+T(0,1)*(R[detect_post_up]+R[detect_post_down])+T(0,2)*(R[grasp_post_up]+R[grasp_post_down])+T(0,3)*(R[put_post_up]+R[put_post_down]));
 					Vtray[0][up]=R[nav_post_up] + gamma*(T(0,0)*R[nav_post_up]+T(0,1)*R[detect_post_up]+T(0,2)*R[grasp_post_up]+T(0,3)*R[put_post_up]);
 					Vtray[0][down]=R[nav_post_down] + gamma*(T(0,0)*R[nav_post_down]+T(0,1)*R[detect_post_down]+T(0,2)*R[grasp_post_down]+T(0,3)*R[put_post_down]);
 				}
@@ -109,15 +105,11 @@ float gamma=0.1;  // define the discount factor "gamma"
 			{
 				if (action_stage=="pre-config")
 				{
-					//Vtray[0][up]=R[detect_pre_up] + gamma*(T(1,0)*(R[nav_pre_up]+R[nav_pre_down])+T(1,1)*(R[detect_pre_up]+R[detect_pre_down])+T(1,2)*(R[grasp_pre_up]+R[grasp_pre_down])+T(1,3)*(R[put_pre_up]+R[put_pre_down]));
-					//Vtray[0][down]=R[detect_pre_down] + gamma*(T(1,0)*(R[nav_pre_up]+R[nav_pre_down])+T(1,1)*(R[detect_pre_up]+R[detect_pre_down])+T(1,2)*(R[grasp_pre_up]+R[grasp_pre_down])+T(1,3)*(R[put_pre_up]+R[put_pre_down]));
 					Vtray[0][up]=R[detect_pre_up] + gamma*(T(1,0)*R[nav_pre_up]+T(1,1)*R[detect_pre_up]+T(1,2)*R[grasp_pre_up]+T(1,3)*R[put_pre_up]);
 					Vtray[0][down]=R[detect_pre_down] + gamma*(T(1,0)*R[nav_pre_down]+T(1,1)*R[detect_pre_down]+T(1,2)*R[grasp_pre_down]+T(1,3)*R[put_pre_down]);
 				}
 				if (action_stage=="post-config")
 				{
-					//Vtray[0][up]=R[detect_post_up] + gamma*(T(1,0)*(R[nav_post_up]+R[nav_post_down])+T(1,1)*(R[detect_post_up]+R[detect_post_down])+T(1,2)*(R[grasp_post_up]+R[grasp_post_down])+T(1,3)*(R[put_post_up]+R[put_post_down]));
-					//Vtray[0][down]=R[detect_post_down] + gamma*(T(1,0)*(R[nav_post_up]+R[nav_post_down])+T(1,1)*(R[detect_post_up]+R[detect_post_down])+T(1,2)*(R[grasp_post_up]+R[grasp_post_down])+T(1,3)*(R[put_post_up]+R[put_post_down]));
 					Vtray[0][up]=R[detect_post_up] + gamma*(T(1,0)*R[nav_post_up]+T(1,1)*R[detect_post_up]+T(1,2)*R[grasp_post_up]+T(1,3)*R[put_post_up]);
 					Vtray[0][down]=R[detect_post_down] + gamma*(T(1,0)*R[nav_post_down]+T(1,1)*R[detect_post_down]+T(1,2)*R[grasp_post_down]+T(1,3)*R[put_post_down]);
 				}
@@ -126,15 +118,11 @@ float gamma=0.1;  // define the discount factor "gamma"
 			{
 				if (action_stage=="pre-config")
 				{
-					//Vtray[0][up]=R[grasp_pre_up] + gamma*(T(2,0)*(R[nav_pre_up]+R[nav_pre_down])+T(2,1)*(R[detect_pre_up]+R[detect_pre_down])+T(2,2)*(R[grasp_pre_up]+R[grasp_pre_down])+T(2,3)*(R[put_pre_up]+R[put_pre_down]));
-					//Vtray[0][down]=R[grasp_pre_down] + gamma*(T(2,0)*(R[nav_pre_up]+R[nav_pre_down])+T(2,1)*(R[detect_pre_up]+R[detect_pre_down])+T(2,2)*(R[grasp_pre_up]+R[grasp_pre_down])+T(2,3)*(R[put_pre_up]+R[put_pre_down]));
 					Vtray[0][up]=R[grasp_pre_up] + gamma*(T(2,0)*R[nav_pre_up]+T(2,1)*R[detect_pre_up]+T(2,2)*R[grasp_pre_up]+T(3,3)*R[put_pre_up]);
 					Vtray[0][down]=R[grasp_pre_down] + gamma*(T(2,0)*R[nav_pre_down]+T(2,1)*R[detect_pre_down]+T(2,2)*R[grasp_pre_down]+T(3,3)*R[put_pre_down]);
 				}
 				if (action_stage=="post-config")
 				{
-					//Vtray[0][up]=R[grasp_post_up] + gamma*(T(2,0)*(R[nav_post_up]+R[nav_post_down])+T(2,1)*(R[detect_post_up]+R[detect_post_down])+T(2,2)*(R[grasp_post_up]+R[grasp_post_down])+T(2,3)*(R[put_post_up]+R[put_post_down]));
-					//Vtray[0][down]=R[grasp_post_down] + gamma*(T(2,0)*(R[nav_post_up]+R[nav_post_down])+T(2,1)*(R[detect_post_up]+R[detect_post_down])+T(2,2)*(R[grasp_post_up]+R[grasp_post_down])+T(2,3)*(R[put_post_up]+R[put_post_down]));
 					Vtray[0][up]=R[grasp_post_up] + gamma*(T(2,0)*R[nav_post_up]+T(2,1)*R[detect_post_up]+T(2,2)*R[grasp_post_up]+T(2,3)*R[put_post_up]);
 					Vtray[0][down]=R[grasp_post_down] + gamma*(T(2,0)*R[nav_post_down]+T(2,1)*R[detect_post_down]+T(2,2)*R[grasp_post_down]+T(2,3)*R[put_post_down]);
 				}
@@ -143,15 +131,11 @@ float gamma=0.1;  // define the discount factor "gamma"
 			{
 				if (action_stage=="pre-config")
 				{
-					//Vtray[0][up]=R[put_pre_up] + gamma*(T(3,0)*(R[nav_pre_up]+R[nav_pre_down])+T(3,1)*(R[detect_pre_up]+R[detect_pre_down])+T(3,2)*(R[grasp_pre_up]+R[grasp_pre_down])+T(3,3)*(R[put_pre_up]+R[put_pre_down]));
-					//Vtray[0][down]=R[put_pre_down] + gamma*(T(3,0)*(R[nav_pre_up]+R[nav_pre_down])+T(3,1)*(R[detect_pre_up]+R[detect_pre_down])+T(3,2)*(R[grasp_pre_up]+R[grasp_pre_down])+T(3,3)*(R[put_pre_up]+R[put_pre_down]));
 					Vtray[0][up]=R[put_pre_up] + gamma*(T(3,0)*R[nav_pre_up]+T(3,1)*R[detect_pre_up]+T(3,2)*R[grasp_pre_up]+T(3,3)*R[put_pre_up]);
 					Vtray[0][down]=R[put_pre_down] + gamma*(T(3,0)*R[nav_pre_down]+T(3,1)*R[detect_pre_down]+T(3,2)*R[grasp_pre_down]+T(3,3)*R[put_pre_down]);
 				}
 				if (action_stage=="post-config")
 				{
-					//Vtray[0][up]=R[put_post_up] + gamma*(T(3,0)*(R[nav_post_up]+R[nav_post_down])+T(3,1)*(R[detect_post_up]+R[detect_post_down])+T(3,2)*(R[grasp_post_up]+R[grasp_post_down])+T(3,3)*(R[put_post_up]+R[put_post_down]));
-					//Vtray[0][down]=R[put_post_down] + gamma*(T(3,0)*(R[nav_post_up]+R[nav_post_down])+T(3,1)*(R[detect_post_up]+R[detect_post_down])+T(3,2)*(R[grasp_post_up]+R[grasp_post_down])+T(3,3)*(R[put_post_up]+R[put_post_down]));
 					Vtray[0][up]=R[put_post_up] + gamma*(T(3,0)*R[nav_post_up]+T(3,1)*R[detect_post_up]+T(3,2)*R[grasp_post_up]+T(3,3)*R[put_post_up]);
 					Vtray[0][down]=R[put_post_down] + gamma*(T(3,0)*R[nav_post_down]+T(3,1)*R[detect_post_down]+T(3,2)*R[grasp_post_down]+T(3,3)*R[put_post_down]);
 				}
@@ -170,6 +154,7 @@ for (int j=1;j>=0;j--)
 }*/
 
 //------------- Chose the best way with the Bees Algorithm-------------
+
 		int temp2;
 		double temp1 ;
 		int nghx[dim]; // Neighborhood X[]-Direction ( m )
@@ -188,9 +173,7 @@ for (int j=1;j>=0;j--)
 				for(int d=0;d<dim;d++)
 				{
 				bPos[d][i]= randfunc(xs, xe);
-				//std::cout << "bpos " << bPos[d][i] << std::endl;
 				fit[i]=func(bPos[d][i], Vtray);
-				//std::cout << "fit: " << fit[i] << std::endl;
 				}
 			}
 
@@ -198,11 +181,9 @@ for (int j=1;j>=0;j--)
 			// fit, contains the value of the fit350000ness function
 			// thus forming a (fit,bPos) tuple
 
-			//sort by fitness, preserving the (f,pos) tuple
+			//sort by fitness, preserving the (fit,bpos) tuple
 			funcSort(fit, sortedFit, bPos, bPosSort, n); // bpossort contains all the sort position of the scout bees
 			fit[bPosSort[0][0]]=func(bPosSort[0][0], Vtray);
-			//std::cout << "bpossort: " << bPosSort[0][0] << std::endl;
-			//std::cout << "fit: " << fit[bPosSort[0][0]] << std::endl;
 
 			//imax number of iteration
 			for(int iter=0; iter<imax ;iter++)
@@ -231,27 +212,20 @@ for (int j=1;j>=0;j--)
 						for(int d=0;d<dim;d++)//d dimension
 						{
 							candidx[d][k]=bPosSort[d][k]; //define the candidate position
-							//std::cout << "candid: " << candidx[d][k] << std::endl;
 							if ((candidx[d][k]-nghx[d])<xs) // boundry check (left)
 								{
 								 bNghPos[d][j]=randfunc(xs,candidx[d][k]+nghx[d]);
-								//std::cout << "bNghPos1: " << bNghPos[d][j] << std::endl;
-								bNghFit[j]=func(bNghPos[d][j], Vtray);
-								//std::cout << "bNghFit: " << bNghFit[j] << std::endl;
+								 bNghFit[j]=func(bNghPos[d][j], Vtray);
 								}
 							if ((candidx[d][k]+nghx[d])>xe)// boundry check (right)
 								{
 								bNghPos[d][j]=randfunc(candidx[d][k]-nghx[d],xe);
-								//std::cout << "bNghPos2: " << bNghPos[d][j] << std::endl;
 								bNghFit[j]=func(bNghPos[d][j], Vtray);
-								//std::cout << "bNghFit: " << bNghFit[j] << std::endl;
 								}
 							if ((candidx[d][k]-nghx[d])>=xs and (candidx[d][k]+nghx[d])<=xe )
 								{
 								bNghPos[d][j]=randfunc(candidx[d][k]-nghx[d] , candidx[d][k]+nghx[d]);
-								//std::cout << "bNghPos3: " << bNghPos[d][j] << std::endl;
 								bNghFit[j]=func(bNghPos[d][j], Vtray);
-								//std::cout << "bNghFit: " << bNghFit[j] << std::endl;
 								}
 							if(bNghFit[j]>= temp1 )
 							{
@@ -260,6 +234,7 @@ for (int j=1;j>=0;j--)
 							}  // end of choosing the rep bee
 						}
 					}// end of recruitment
+
 				}	// end of  elite Neighbourhood Search
 
 				 //Sort
@@ -268,8 +243,6 @@ for (int j=1;j>=0;j--)
 				sortedFit[0]=temp1;
 				bPosSort[0][0]=temp2;
 			}
-			//std::cout << "temp1: " <<temp1 << std::endl;
-			//std::cout << "temp2: " <<temp2 << std::endl;
 
 	// ----------------------------------------Global search  ------------------------------------
 
@@ -279,22 +252,22 @@ for (int j=1;j>=0;j--)
 						for(int d=0;d<dim;d++)
 						{
 							globalPos[d][k]=randfunc(xs, xe);
-							//std::cout << "bposglobal " << globalPos[d][k] << std::endl;
 							globalFit[k]=func(globalPos[d][k], Vtray);// evaluate the fitness of the new list
-							//std::cout << "fitglobal: " << globalFit[k] << std::endl;
-						 	if(globalFit[k]>= temp1 )
+							if(globalFit[k]>= temp1 )
 							{
 								temp1=globalFit[k];
 								temp2=globalPos[d][k];
 							}
 						}
 					 }
+
 					 //Sort
 				if (sortedFit[0]<= temp1)
 				{
 					sortedFit[0]=temp1;
 					bPosSort[0][0]=temp2;
 				}
+
 			}	//end iter = imax
 
 		} // end runs

@@ -12,13 +12,13 @@
 using namespace std;
 #define dim 1       // Dimension of function
 // Variables used
-#define pop  10		// max num of population
+#define pop  50		// max num of population
 
-int imax=1000;
+int imax=50;
 int n= pop;  // Number of Scout Bees
 int m= 2;   // Number of selected Locations
-int n1 =5;  // Number of Bees around each selected locations ( except the elite location )
-int n2 =9;  // Number of Bees around each elite locations
+int n1 =6;  // Number of Bees around each selected locations ( except the elite location )
+int n2 =20;  // Number of Bees around each elite locations
 int e =1;   // Elite point/s
 
 std::vector<std::vector<float> > Vhead;
