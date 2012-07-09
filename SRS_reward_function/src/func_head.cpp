@@ -73,16 +73,11 @@ int nav_pre_front=0, detect_pre_front=1,grasp_pre_front=2,put_pre_front=3,nav_po
 int nav_pre_back=8,detect_pre_back=9,grasp_pre_back=10,put_pre_back=11,nav_post_back=12,detect_post_back=13,grasp_post_back=14,put_post_back=15;
 std::vector<float> R;   //create a vector R with an unknown size
 	R.resize(16);  // define the size of the vector
-//std::vector<float> T;   //create a vector T with an unknown size
-//T.resize(2);  // define the size of the vector
 Vhead.resize(2);
 for (int i=1;i>=0;i--)
 {
 Vhead[i].resize(2);
 }
-	//----- initialisation in order to compute the value function -----
-						//Vhead[1][0]=R[front];
-						//Vhead[1][1]=R[back];
 
 	//----- definition of the reward -----
 	R[nav_pre_front]=20;		R[detect_pre_front]=10;		R[grasp_pre_front]=10;	R[put_pre_front]=10;
@@ -90,8 +85,6 @@ Vhead[i].resize(2);
 	R[nav_post_front]=20;		R[detect_post_front]=20;	R[grasp_post_front]=10;	R[put_post_front]=20;
 	R[nav_post_back]=10;		R[detect_post_back]=10;		R[grasp_post_back]=20;	R[put_post_back]=10;
 
-	//for (int t=4;t>=0;t--)
-	//{
 	if (action_name=="navigation")
 	{
 		if (action_stage=="pre-config")

@@ -86,26 +86,6 @@ float gamma=0.1;  // define the discount factor "gamma"
 	Vtorso[i].resize(16);
 	}
 
-/*	//----- initialisation in order to compute the value function -----
-				Vtorso[5][0]=R[home];
-				Vtorso[5][1]=R[left];
-				Vtorso[5][2]=R[right];
-				Vtorso[5][3]=R[front];
-				Vtorso[5][4]=R[front_left];
-				Vtorso[5][5]=R[front_right];
-				Vtorso[5][6]=R[back];
-				Vtorso[5][7]=R[back_extreme];
-				Vtorso[5][8]=R[back_left];
-				Vtorso[5][9]=R[back_left_extreme];
-				Vtorso[5][10]=R[back_right];
-				Vtorso[5][11]=R[back_right_extreme];
-				Vtorso[5][12]=R[nod];
-				Vtorso[5][13]=R[lookontray];
-				Vtorso[5][14]=R[bow];
-				Vtorso[5][15]=R[shake];*/
-	//for (int t=4;t>=0;t--)
-		//{
-
 	//----- definition of the reward -----
 				R[nav_pre_home]=20;					R[detect_pre_home]=20;					R[grasp_pre_home]=20;				R[put_pre_home]=20;
 				R[nav_pre_left]=8;					R[detect_pre_left]=2;					R[grasp_pre_left]=3;				R[put_pre_left]=2;
@@ -275,7 +255,6 @@ float gamma=0.1;  // define the discount factor "gamma"
 					Vtorso[0][lookontray]=R[put_post_lookontray] + gamma*(T(3,0)*R[nav_post_lookontray]+T(3,1)*R[detect_post_lookontray]+T(3,2)*R[grasp_post_lookontray]+T(3,3)*R[put_post_lookontray]);
 				}
 			}
-		//}
 
 //------------- Chose the best way with the function max -------------
 

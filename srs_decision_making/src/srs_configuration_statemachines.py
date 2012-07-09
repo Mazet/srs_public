@@ -123,11 +123,11 @@ class state_checking_during_paused (smach.State):
     
 ################################################################################################
 
-#def get_sdh_state(msg):
-#    global sdh_pos
-#    sdh_pos = list(msg.desired.positions)  
-#    rospy.spin();
-
+def get_sdh_state(msg):
+    global sdh_pos
+    sdh_pos = list(msg.desired.positions)
+    #print sdh_pos
+    
 def get_arm_state(msg):
     global arm_pos
     arm_pos = list(msg.desired.positions)
@@ -149,7 +149,7 @@ def get_tray_state(msg):
 #    rospy.spin();
 
 def my_movement(action_name, action_stage, result_action, object_in_hand, object_on_tray, msg):
-    global current_task_info
+    global current_task_info, arm_pos, sdh_pos
     len_step_info = len(current_task_info.last_step_info)
     result_action = current_task_info.last_step_info[len_step_info - 1].outcome
           
@@ -206,46 +206,48 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
         if current_task_info.object_on_tray == True :
             current_task_info.probability = [[0.1,0.7,0.2,0],[1,0,0,0],[0.7,0,0.3,0],[1,0,0,0]]
         
-#        # sdhstate define only by the name    
-#        sdhstate=resp.sdhstate
-#        # sdhstate define by the coordinates 
-#        if sdhstate =='home':
-#            sdhstate = [[0.0,0.0,0.0,0.0,0.0,0.0,0.0]]
-#        if sdhstate =='cylclosed':
-#            sdhstate = [[0.0,0.0,1.0472,0.0,1.0472,0.0,1.0472]]
-#        if sdhstate =='cylopen':
-#            sdhstate = [[0.0,-0.9854,0.9472,-0.9854,0.9472,-0.9854,0.9472]]
-#        if sdhstate =='cyltotalopen':
-#            sdhstate = [[0.0,-1.57,-1.57,-1.57,-1.57,-1.57,-1.57]]
-#        if sdhstate =='spheropen':
-#            sdhstate = [[1.047,-0.785,1.047,-0.785,1.047,-0.785,1.047]]
-#        if sdhstate =='spherclosed':
-#            sdhstate = [[1.047,-0.262,1.047,-0.262,1.047,-0.262,1.047]]
-#        if sdhstate =='paropen':
-#            sdhstate = [[-0.524,0,0,1.57,0.524,-0.524,0.524]]
-#        if sdhstate =='parclosed':
-#            sdhstate = [[1.57,0,1.57,0,0,0,0]]
-#        if sdhstate =='point':
-#            sdhstate = [[0,0,1.57,0,1.57,0,0]]
-#        if sdhstate =='fist':
-#            sdhstate = [[0,0,1.57,0,1.57,0,1.57]]                 
-#        if current_task_info.object_in_hand == False :
-#            # threshold to define if the robot need to move or not
-#            print sdhstate
-#            print '------------------------------------------------------------'
-#            print sdh_pos
-#            print '--------------------------------'
-#            print sdh_pos[0] - sdhstate[0][0]
-#            print sdh_pos[1] - sdhstate[0][1]
-#            print sdh_pos[2] - sdhstate[0][2]
-#            print sdh_pos[3] - sdhstate[0][3]
-#            print sdh_pos[4] - sdhstate[0][4]
-#            print sdh_pos[5] - sdhstate[0][5]
-#            print sdh_pos[6] - sdhstate[0][6]
-#               
-#            if -0.01 < sdh_pos[0] - sdhstate[0][0] > 0.01 or -0.01 < sdh_pos[1] - sdhstate[0][1] > 0.01 or-0.01 < sdh_pos[2] - sdhstate[0][2] > 0.01 or -0.01 < sdh_pos[3] - sdhstate[0][3] > 0.01 or -0.01 < sdh_pos[4] - sdhstate[0][4] > 0.01 or -0.01 < sdh_pos[5] - sdhstate[0][5] > 0.01 or -0.01 < sdh_pos[6] - sdhstate[0][6] > 0.01:  
-#               sss.move("sdh",sdhstate)
-            
+        """
+        # sdhstate define only by the name    
+        sdhstate=resp.sdhstate
+        # sdhstate define by the coordinates 
+        if sdhstate =='home':
+            sdhstate = [[0.0,0.0,0.0,0.0,0.0,0.0,0.0]]
+        if sdhstate =='cylclosed':
+            sdhstate = [[0.0,0.0,1.0472,0.0,1.0472,0.0,1.0472]]
+        if sdhstate =='cylopen':
+            sdhstate = [[0.0,-0.9854,0.9472,-0.9854,0.9472,-0.9854,0.9472]]
+        if sdhstate =='cyltotalopen':
+            sdhstate = [[0.0,-1.57,-1.57,-1.57,-1.57,-1.57,-1.57]]
+        if sdhstate =='spheropen':
+            sdhstate = [[1.047,-0.785,1.047,-0.785,1.047,-0.785,1.047]]
+        if sdhstate =='spherclosed':
+            sdhstate = [[1.047,-0.262,1.047,-0.262,1.047,-0.262,1.047]]
+        if sdhstate =='paropen':
+            sdhstate = [[-0.524,0,0,1.57,0.524,-0.524,0.524]]
+        if sdhstate =='parclosed':
+            sdhstate = [[1.57,0,1.57,0,0,0,0]]
+        if sdhstate =='point':
+            sdhstate = [[0,0,1.57,0,1.57,0,0]]
+        if sdhstate =='fist':
+            sdhstate = [[0,0,1.57,0,1.57,0,1.57]]                 
+        if current_task_info.object_in_hand == False :
+            # threshold to define if the robot need to move or not
+            print sdhstate
+            print '------------------------------------------------------------'
+            print sdh_pos
+            print '--------------------------------'
+            print sdh_pos[0] - sdhstate[0][0]
+            print sdh_pos[1] - sdhstate[0][1]
+            print sdh_pos[2] - sdhstate[0][2]
+            print sdh_pos[3] - sdhstate[0][3]
+            print sdh_pos[4] - sdhstate[0][4]
+            print sdh_pos[5] - sdhstate[0][5]
+            print sdh_pos[6] - sdhstate[0][6]
+               
+            if -0.01 < sdh_pos[0] - sdhstate[0][0] > 0.01 or -0.01 < sdh_pos[1] - sdhstate[0][1] > 0.01 or-0.01 < sdh_pos[2] - sdhstate[0][2] > 0.01 or -0.01 < sdh_pos[3] - sdhstate[0][3] > 0.01 or -0.01 < sdh_pos[4] - sdhstate[0][4] > 0.01 or -0.01 < sdh_pos[5] - sdhstate[0][5] > 0.01 or -0.01 < sdh_pos[6] - sdhstate[0][6] > 0.01:  
+               sss.move("sdh",sdhstate)
+        """
+  
         # armstate define only by the name      
         armstate=resp.armstate
         #armstate define by the coordinates
@@ -284,17 +286,17 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
         if armstate =='waveout':
             armstate = [[1.5, 0.5, 0.0, 0.5, 0.0, -0.5, 0.0]]
         # threshold to define if the robot need to move or not
-        print armstate
-        print '======================================================================================='
-        print arm_pos
-        print '=============================='
-        print arm_pos[0] - armstate[0][0]
-        print arm_pos[1] - armstate[0][1]
-        print arm_pos[2] - armstate[0][2]
-        print arm_pos[3] - armstate[0][3]
-        print arm_pos[4] - armstate[0][4]
-        print arm_pos[5] - armstate[0][5]
-        print arm_pos[6] - armstate[0][6]
+#        print armstate
+#        print '======================================================================================='
+#        print arm_pos
+#        print '=============================='
+#        print arm_pos[0] - armstate[0][0]
+#        print arm_pos[1] - armstate[0][1]
+#        print arm_pos[2] - armstate[0][2]
+#        print arm_pos[3] - armstate[0][3]
+#        print arm_pos[4] - armstate[0][4]
+#        print arm_pos[5] - armstate[0][5]
+#        print arm_pos[6] - armstate[0][6]
         if -0.0000000001 < arm_pos[0] - armstate[0][0] > 0.0000000001 or -0.0000000001 < arm_pos[1] - armstate[0][1] > 0.0000000001 or-0.0000000001 < arm_pos[2] - armstate[0][2] > 0.0000000001 or -0.0000000001 < arm_pos[3] - armstate[0][3] > 0.0000000001 or -0.0000000001 < arm_pos[4] - armstate[0][4] > 0.0000000001 or -0.0000000001 < arm_pos[5] - armstate[0][5] > 0.0000000001 or -0.0000000001 < arm_pos[6] - armstate[0][6] > 0.0000000001:
         #if -0.0000000001 < current_task_info.arm_pos[0] - armstate[0][0] > 0.0000000001 or -0.0000000001 < current_task_info.arm_pos[1] - armstate[0][1] > 0.0000000001 or-0.0000000001 < current_task_info.arm_pos[2] - armstate[0][2] > 0.0000000001 or -0.0000000001 < current_task_info.arm_pos[3] - armstate[0][3] > 0.0000000001 or -0.0000000001 < current_task_info.arm_pos[4] - armstate[0][4] > 0.0000000001 or -0.0000000001 < current_task_info.arm_pos[5] - armstate[0][5] > 0.0000000001 or -0.0000000001 < current_task_info.arm_pos[6] - armstate[0][6] > 0.0000000001:
             sss.move("arm",armstate)
@@ -307,11 +309,11 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
         if headstate =='back':
             headstate = [[0.0]]
         # threshold to define if the robot need to move or not
-        print headstate
-        print '*********************************************************'
-        print head_pos
-        print '*******************************'
-        print head_pos[0] - headstate[0][0]
+#        print headstate
+#        print '*********************************************************'
+#        print head_pos
+#        print '*******************************'
+#        print head_pos[0] - headstate[0][0]
         if -0.00001 < head_pos[0] - headstate[0][0] > 0.00001 :
             sss.move("head",headstate)
             
@@ -345,13 +347,13 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
         if torsostate =='lookontray':
             torsostate = [[-0.174,0,-0.262]]
         # threshold to define if the robot need to move or not
-        print torsostate
-        print '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-        print torso_pos
-        print '+++++++++++++++++++++++++++++++++++++++++++++'
-        print torso_pos[0] - torsostate[0][0]
-        print torso_pos[1] - torsostate[0][1]
-        print torso_pos[2] - torsostate[0][2]
+#        print torsostate
+#        print '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+#        print torso_pos
+#        print '+++++++++++++++++++++++++++++++++++++++++++++'
+#        print torso_pos[0] - torsostate[0][0]
+#        print torso_pos[1] - torsostate[0][1]
+#        print torso_pos[2] - torsostate[0][2]
         if -0.01 < torso_pos[0] - torsostate[0][0] > 0.01 or -0.01 < torso_pos[1] - torsostate[0][1] > 0.01 or-0.01 < torso_pos[2] - torsostate[0][2] > 0.01 :       
             sss.move("torso",torsostate)
             
@@ -365,17 +367,17 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
         
         if current_task_info.object_on_tray == False :
             # threshold to define if the robot need to move or not
-            print traystate
-            print '///////////////////////////////////////////////////////////////'
-            print tray_pos
-            print '////////////////////////////////'
-            print tray_pos[0] - traystate[0][0]
+#            print traystate
+#            print '///////////////////////////////////////////////////////////////'
+#            print tray_pos
+#            print '////////////////////////////////'
+#            print tray_pos[0] - traystate[0][0]
             if -0.00001 < tray_pos[0] - traystate[0][0] > 0.0001 :
                 sss.move("tray",traystate)
-            
+           
     except rospy.ServiceException, e:
         print "Service call failed: %s"%e
-
+                   
 ################################################################################################
 
 def robot_configuration(parent, action_name, action_stage, result_action, object_in_hand, object_on_tray, msg):

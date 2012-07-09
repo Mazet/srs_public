@@ -87,25 +87,6 @@ void reward_arm (std::string action_name, std::string action_stage,std::string r
 	Varm[i].resize(16);
 	}
 
-	//----- initialisation in order to compute the value function ----- need this part only if more than 1 next action is known
-	/*				Varm[5][0]=R[home];
-					Varm[5][1]=R[folded];
-					Varm[5][2]=R[pregrasp];
-					Varm[5][3]=R[pregrasp_top];
-					Varm[5][4]=R[grasp];
-					Varm[5][5]=R[hold];
-					Varm[5][6]=R[pre_look_at_table];
-					Varm[5][7]=R[look_at_table];
-					Varm[5][8]=R[overtray];
-					Varm[5][9]=R[overtray_top];
-					Varm[5][10]=R[tray];
-					Varm[5][11]=R[intermediateback];
-					Varm[5][12]=R[intermediatebacklow];
-					Varm[5][13]=R[intermediatefront];
-					Varm[5][14]=R[intermediatefront_top];
-					Varm[5][15]=R[wavein];
-					Varm[5][16]=R[waveout];*/
-
 	//----- definition of the reward -----
 			R[nav_pre_home]=3;					R[detect_pre_home]=4;					R[grasp_pre_home]=7;					R[put_pre_home]=4;
 			R[nav_pre_folded]=131;				R[detect_pre_folded]=10;				R[grasp_pre_folded]=10;					R[put_pre_folded]=3;
@@ -143,9 +124,6 @@ void reward_arm (std::string action_name, std::string action_stage,std::string r
 			R[nav_post_wavein]=4;				R[detect_post_wavein]=6;				R[grasp_post_wavein]=4;					R[put_post_wavein]=3;
 			R[nav_post_waveout]=3;				R[detect_post_waveout]=5;				R[grasp_post_waveout]=3;				R[put_post_waveout]=2;
 
-
-	//for (int t=4;t>=0;t--)
-	//{
 		if (action_name=="navigation")
 		{
 			if (action_stage=="pre-config")
@@ -318,7 +296,6 @@ void reward_arm (std::string action_name, std::string action_stage,std::string r
 				Varm[0][waveout]=R[put_post_waveout] + gamma*(T(3,0)*R[nav_post_waveout]+T(3,1)*R[detect_post_waveout]+T(3,2)*R[grasp_post_waveout]+T(3,3)*R[put_post_waveout]);
 			}
 		}
-	//}
 
 //------------- Chose the best way with the function max -------------
 

@@ -79,9 +79,6 @@ float gamma=0.1;  // define the discount factor "gamma"
 	Vtray[i].resize(2);
 	}
 
-//----- initialisation in order to compute the value function ----- need this part only if more than 1 next action is known
-					//Vtray[1][0]=R[up];
-					//Vtray[1][1]=R[down];
 //----- definition of the reward -----
 	R[nav_pre_up]=5;		R[detect_pre_up]=5;			R[grasp_pre_up]=5;		R[put_pre_up]=100;
 	R[nav_pre_down]=100;	R[detect_pre_down]=100;		R[grasp_pre_down]=100;	R[put_pre_down]=1;

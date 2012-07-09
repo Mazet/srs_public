@@ -86,18 +86,6 @@ float gamma=0.1;  // define the discount factor "gamma"
 	Vsdh[i].resize(10);
 	}
 
-//----- initialisation in order to compute the value function ----- need this part only if more than 1 next action is known
-			/*Vsdh[5][0]=R[home];
-			Vsdh[5][1]=R[cylclosed];
-			Vsdh[5][2]=R[cylopen];
-			Vsdh[5][3]=R[cyltotalopen];
-			Vsdh[5][4]=R[spheropen];
-			Vsdh[5][5]=R[spherclosed];
-			Vsdh[5][6]=R[paropen];
-			Vsdh[5][7]=R[parclosed];
-			Vsdh[5][8]=R[point];
-			Vsdh[5][9]=R[fist];*/
-
 	//----- definition of the reward -----
 		R[nav_pre_home]=3;				R[detect_pre_home]=8;				R[grasp_pre_home]=9;			R[put_pre_home]=9;
 		R[nav_pre_cylclosed]=20;		R[detect_pre_cylclosed]=20;			R[grasp_pre_cylclosed]=20;		R[put_pre_cylclosed]=20;
