@@ -285,7 +285,9 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
             armstate = [[1.5, 0.5, 0.0, -0.5, 0.0, 0.5, 0.0]]
         if armstate =='waveout':
             armstate = [[1.5, 0.5, 0.0, 0.5, 0.0, -0.5, 0.0]]
+            
         # threshold to define if the robot need to move or not
+        
 #        print armstate
 #        print '======================================================================================='
 #        print arm_pos
@@ -308,7 +310,9 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
             headstate = [[-3.1415926]]
         if headstate =='back':
             headstate = [[0.0]]
+            
         # threshold to define if the robot need to move or not
+        
 #        print headstate
 #        print '*********************************************************'
 #        print head_pos
@@ -346,7 +350,9 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
             torsostate = [[0.20,0.1,0.35]]
         if torsostate =='lookontray':
             torsostate = [[-0.174,0,-0.262]]
+            
         # threshold to define if the robot need to move or not
+
 #        print torsostate
 #        print '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 #        print torso_pos
@@ -366,7 +372,9 @@ def my_movement(action_name, action_stage, result_action, object_in_hand, object
             traystate = [[-3.1415926]]
         
         if current_task_info.object_on_tray == False :
+            
             # threshold to define if the robot need to move or not
+            
 #            print traystate
 #            print '///////////////////////////////////////////////////////////////'
 #            print tray_pos

@@ -94,6 +94,8 @@ class goal_structure():
         
         #reference to the action server
         self._srs_as=""
+
+##########################################################################
         
         #result of the actions (if it succeeded, failed ....)
         self.result_action = ""
@@ -101,6 +103,8 @@ class goal_structure():
         # initialisation of the probability matrix (only one time at the beginning)
         # after the new probability matrix computed replace the value of the initialisation
         self.probability = [[0.1,0.7,0.2,0],[1,0,0,0],[0.7,0,0.3,0],[1,0,0,0]]
+
+###########################################################################
 
         ## backward compatible need to be revised after the integration meeting         
         #feedback publisher, intervention required
@@ -293,5 +297,8 @@ class goal_structure():
         
         return rb_pose
  
+ #############################################################
 
 current_task_info = goal_structure() 
+
+#############################################################
